@@ -25,47 +25,47 @@ def create_app():
 
 
     
-    # @jwt.unauthorized_loader
-    # def custom_missing_auth_header(err_msg):
-    #     return jsonify({
-    #         "response": {
-    #             "message": "Authentication required",
-    #             "data": None,
-    #             "error": {
-    #                 "code": "auth_missing",
-    #                 "details": err_msg
-    #             }
-    #         },
-    #         "status_code": 401
-    #     }), 401
+    @jwt.unauthorized_loader
+    def custom_missing_auth_header(err_msg):
+        return jsonify({
+            "response": {
+                "message": "Authentication required",
+                "data": None,
+                "error": {
+                    "code": "auth_missing",
+                    "details": err_msg
+                }
+            },
+            "status_code": 401
+        }), 401
 
-    # @jwt.invalid_token_loader
-    # def custom_invalid_token(err_msg):
-    #     return jsonify({
-    #         "response": {
-    #             "message": "Invalid token",
-    #             "data": None,
-    #             "error": {
-    #                 "code": "invalid_token",
-    #                 "details": err_msg
-    #             }
-    #         },
-    #         "status_code": 422
-    #     }), 422
+    @jwt.invalid_token_loader
+    def custom_invalid_token(err_msg):
+        return jsonify({
+            "response": {
+                "message": "Invalid token",
+                "data": None,
+                "error": {
+                    "code": "invalid_token",
+                    "details": err_msg
+                }
+            },
+            "status_code": 422
+        }), 422
 
-    # @jwt.expired_token_loader
-    # def custom_expired_token(jwt_header, jwt_payload):
-    #     return jsonify({
-    #         "response": {
-    #             "message": "Token expired",
-    #             "data": None,
-    #             "error": {
-    #                 "code": "token_expired",
-    #                 "details": "The token has expired"
-    #             }
-    #         },
-    #         "status_code": 401
-    #     }), 401
+    @jwt.expired_token_loader
+    def custom_expired_token(jwt_header, jwt_payload):
+        return jsonify({
+            "response": {
+                "message": "Token expired",
+                "data": None,
+                "error": {
+                    "code": "token_expired",
+                    "details": "The token has expired"
+                }
+            },
+            "status_code": 401
+        }), 401
 
     # # Import models after app is created
     with app.app_context():
